@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AgriPredict — Crop & Fertilizer Recommendation System</title>
+<meta name="description" content="Get data-driven crop and fertilizer recommendations based on soil nutrients and climate conditions." />
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<div class="api-banner" id="api-banner"></div>
+
+<header class="site-header">
+  <div class="container nav-row">
+    <a href="index.html" class="brand">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 22C12 22 4 18 4 10.5C4 5.8 7.8 2 12.5 2C11.9 6.8 12 12 12 22Z" fill="#3c6e47"/><path d="M12 22C12 22 20 18 20 10.5C20 5.8 16.2 2 11.5 2C12.1 6.8 12 12 12 22Z" fill="#2a4d32"/></svg>
+      AgriPredict
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="crop.html">Crop Advisor</a></li>
+      <li><a href="fertilizer.html">Fertilizer Advisor</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">FINAL YEAR MINI PROJECT — MACHINE LEARNING</div>
+      <h1>Know what to grow and what to feed it, before you plant a single seed.</h1>
+      <p class="lead">
+        AgriPredict takes your soil's N-P-K values, pH, and local climate readings,
+        then uses two trained classification models to suggest the crop most likely
+        to thrive and the fertilizer that will actually help it.
+      </p>
+      <div class="btn-row">
+        <a href="crop.html" class="btn btn-primary">Get a Crop Recommendation</a>
+        <a href="fertilizer.html" class="btn btn-secondary">Get a Fertilizer Recommendation</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <h3 style="margin-bottom:0.75rem;">How the models see your field</h3>
+      <table class="table-plain">
+        <tr><th>N</th><td>Nitrogen content in soil (kg/ha)</td></tr>
+        <tr><th>P</th><td>Phosphorus content in soil (kg/ha)</td></tr>
+        <tr><th>K</th><td>Potassium content in soil (kg/ha)</td></tr>
+        <tr><th>pH</th><td>Soil acidity / alkalinity</td></tr>
+        <tr><th>Temp / Humidity</th><td>Local climate averages</td></tr>
+        <tr><th>Rainfall</th><td>Annual rainfall (mm)</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="stat-strip container" style="border-left:1px solid var(--line); border-right:1px solid var(--line);">
+  <div><span class="stat-num">22</span><span class="stat-label">crops recognised</span></div>
+  <div><span class="stat-num">7</span><span class="stat-label">fertilizer types</span></div>
+  <div><span class="stat-num">2,301</span><span class="stat-label">training records</span></div>
+</div>
+
+<section class="container">
+  <h2>Two tools, one dataset-backed pipeline</h2>
+  <ul class="feature-list">
+    <li>
+      <h3>🌾 Crop Recommendation</h3>
+      <p>Enter your soil's N-P-K, pH, temperature, humidity and rainfall. A Random Forest model trained on 2,200+ field samples across 22 crops returns the best match plus two runner-ups.</p>
+    </li>
+    <li>
+      <h3>🧪 Fertilizer Recommendation</h3>
+      <p>Pick your soil type and the crop you're growing, and the model cross-checks your N-P-K levels against what that crop actually needs to suggest the right fertilizer mix.</p>
+    </li>
+    <li>
+      <h3>📊 Confidence, not just a label</h3>
+      <p>Every result comes with a confidence score and the runner-up predictions, so you can see how clear-cut the recommendation really is instead of trusting a black box.</p>
+    </li>
+  </ul>
+</section>
+
+<section class="container">
+  <div class="panel">
+    <div class="two-col">
+      <div>
+        <h2>Why this exists</h2>
+        <p>
+          A lot of crop failures and wasted fertilizer come down to guesswork —
+          farmers going with what worked last season, or a soil test result
+          that never gets translated into an actual decision. This project
+          takes standard soil/climate readings and turns them into a direct
+          recommendation, using the same kind of models agronomists already
+          use to study these datasets.
+        </p>
+        <a href="about.html" class="btn btn-outline">Read about the dataset &amp; models →</a>
+      </div>
+      <div>
+        <h2>Built with</h2>
+        <table class="table-plain">
+          <tr><th>Models</th><td>Random Forest (scikit-learn)</td></tr>
+          <tr><th>Backend</th><td>Flask REST API</td></tr>
+          <tr><th>Frontend</th><td>HTML / CSS / vanilla JS</td></tr>
+          <tr><th>Mobile</th><td>Flutter (calls the same API)</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>AgriPredict</h4>
+        <p style="font-size:0.88rem; color:#4a5240;">A crop & fertilizer recommendation system built as a machine learning mini-project. Not a substitute for professional agronomic advice.</p>
+      </div>
+      <div>
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="crop.html">Crop Advisor</a></li>
+          <li><a href="fertilizer.html">Fertilizer Advisor</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Project</h4>
+        <ul>
+          <li><a href="about.html">About &amp; dataset</a></li>
+          <li><a href="https://github.com/" target="_blank" rel="noopener">Source code</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom container" style="padding:0;">
+      <span>© 2026 AgriPredict — Academic mini-project.</span>
+      <span>Datasets: Crop Recommendation Dataset · Fertilizer Prediction Dataset</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/api.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About — AgriPredict</title>
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<div class="api-banner" id="api-banner"></div>
+
+<header class="site-header">
+  <div class="container nav-row">
+    <a href="index.html" class="brand">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 22C12 22 4 18 4 10.5C4 5.8 7.8 2 12.5 2C11.9 6.8 12 12 12 22Z" fill="#3c6e47"/><path d="M12 22C12 22 20 18 20 10.5C20 5.8 16.2 2 11.5 2C12.1 6.8 12 12 12 22Z" fill="#2a4d32"/></svg>
+      AgriPredict
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="crop.html">Crop Advisor</a></li>
+      <li><a href="fertilizer.html">Fertilizer Advisor</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="container" style="padding-top:2.5rem;">
+  <div class="eyebrow">ABOUT THE PROJECT</div>
+  <h1>How this actually works</h1>
+  <p class="lead">No magic — two standard classification models, trained on two public agricultural datasets, wrapped in a Flask API and this frontend.</p>
+
+  <div class="two-col" style="margin-top:2rem;">
+    <div class="panel">
+      <h3>Crop Recommendation model</h3>
+      <table class="table-plain">
+        <tr><th>Algorithm</th><td>Random Forest Classifier</td></tr>
+        <tr><th>Training data</th><td>2,200 rows, 22 crop classes</td></tr>
+        <tr><th>Input features</th><td>N, P, K, temperature, humidity, pH, rainfall</td></tr>
+        <tr><th>Held-out accuracy</th><td id="crop-acc">—</td></tr>
+      </table>
+    </div>
+    <div class="panel">
+      <h3>Fertilizer Recommendation model</h3>
+      <table class="table-plain">
+        <tr><th>Algorithm</th><td>Random Forest Classifier</td></tr>
+        <tr><th>Training data</th><td>99 rows, 7 fertilizer classes</td></tr>
+        <tr><th>Input features</th><td>Temperature, humidity, moisture, soil type, crop type, N, K, P</td></tr>
+        <tr><th>Held-out accuracy</th><td id="fert-acc">—</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <div class="two-col">
+    <div>
+      <h2>A note on the numbers</h2>
+      <p>
+        The fertilizer dataset only has 99 rows, so its reported accuracy
+        should be read as "this model recognises the patterns in this small,
+        fairly clean dataset well" rather than "this will always be right in
+        the field." Real fertilizer decisions should also factor in local
+        soil testing and agronomic advice — this tool is meant to point you
+        in a reasonable direction, not replace that.
+      </p>
+      <h2>Why Random Forest</h2>
+      <p>
+        Both datasets are small and tabular with a mix of numeric and
+        categorical features. A Random Forest handles that combination
+        well without much tuning, and — unlike a single Decision Tree —
+        it's less likely to just memorise quirks of the training data.
+      </p>
+    </div>
+    <div>
+      <h2>Project structure</h2>
+      <table class="table-plain">
+        <tr><th>backend/</th><td>Flask API + model training script</td></tr>
+        <tr><th>web/</th><td>This frontend (HTML/CSS/JS)</td></tr>
+        <tr><th>mobile/</th><td>Flutter app calling the same API</td></tr>
+      </table>
+      <h2 style="margin-top:1.5rem;">Datasets used</h2>
+      <ul>
+        <li>Crop Recommendation Dataset (Kaggle)</li>
+        <li>Fertilizer Prediction Dataset (Kaggle)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-bottom" style="border-top:none; margin-top:0;">
+    <span>© 2026 AgriPredict — Academic mini-project.</span>
+    <a href="index.html" style="color:#4a5240;">← Back to home</a>
+  </div>
+</footer>
+
+<script src="assets/js/api.js"></script>
+<script src="assets/js/main.js"></script>
+<script>
+  apiGet("/api/meta").then((meta) => {
+    document.getElementById("crop-acc").textContent = (meta.crop_accuracy * 100).toFixed(2) + "%";
+    document.getElementById("fert-acc").textContent = (meta.fertilizer_accuracy * 100).toFixed(2) + "%";
+  }).catch(() => {});
+</script>
+</body>
+</html>
